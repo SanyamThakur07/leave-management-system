@@ -52,7 +52,7 @@ const getAllLeaves = async (req, res) => {
 
 const approveLeave = async (req, res) => {
   try {
-    const leave = await Leave.findById(req.params.id)
+    const leave = await Leave.findById(req.params.id).populate('userId', 'name email')
     if (!leave) {
       return res.status(404).json({ message: 'Leave request not found' })
     }
@@ -69,7 +69,7 @@ const approveLeave = async (req, res) => {
 
 const rejectLeave = async (req, res) => {
   try {
-    const leave = await Leave.findById(req.params.id)
+    const leave = await Leave.findById(req.params.id).populate('userId', 'name email')
     if (!leave) {
       return res.status(404).json({ message: 'Leave request not found' })
     }
